@@ -17,6 +17,7 @@ var site= "https://github.com/";
 var username= "/HansUXdev";
 
 // The naming should be standardized
+	// "quickDemoApp";
 	// "Basic-Portfolio";
 	// "/repair-hub";
 	var reponame = "/Basic-Portfolio";
@@ -24,27 +25,27 @@ var username= "/HansUXdev";
 	var studentList = [
 		// "HansUXdev" // for testing
 		"peques",
-		"jeffhatch"
-
-		// "joselsalazar",
-		// "Cperez2187",
-		// "tkappha",
-		// "Lolobrew",
-		// "Cperez2187",
-		// "afflatus480",
-		// "cqliu1",
-		// "jeffhatch",
-		// "peques",
-		// "wesvanduine"
+		"jeffhatch",
+		"joselsalazar",
+		"jeffhatch",
+		"Lolobrew",
+		"ptk88",
+		"wesvanduine",
+		"Cperez2187",
+		"tkappha",
+		"Cperez2187",
+		"afflatus480",
+		"cqliu1",
+		"heythisispaul",
 	];
 
   var options = {
-    continueOnError: false, // default = false, true means don't emit error event 
+    continueOnError: true, // default = false, true means don't emit error event 
     pipeStdout: false, // default = false, true means stdout is written to file.contents 
     customTemplatingThing: "test" // content passed to gutil.template() 
   };
   var reportOptions = {
-  	err: true, // default = true, false means don't write err 
+  	err: false, // default = true, false means don't write err 
   	stderr: true, // default = true, false means don't write stderr 
   	stdout: true // default = true, false means don't write stdout 
   }
@@ -64,6 +65,16 @@ var username= "/HansUXdev";
 		// Fuck it, hack it and repeat manually with the index number
 		.pipe(exec(urlList[0],options))
 		.pipe(exec(urlList[1],options))
+		.pipe(exec(urlList[2],options))
+		.pipe(exec(urlList[3],options))
+		.pipe(exec(urlList[4],options))
+		.pipe(exec(urlList[5],options))
+		.pipe(exec(urlList[6],options))
+		.pipe(exec(urlList[7],options))
+		.pipe(exec(urlList[8],options))
+		.pipe(exec(urlList[9],options))
+		.pipe(exec(urlList[10],options))
+		.pipe(exec(urlList[11],options))
 		// .pipe(gulp.dest('./test'));
 	    // .pipe(exec(urlList[1],options))
 	    // comment out the line below
