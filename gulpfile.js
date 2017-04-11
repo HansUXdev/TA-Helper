@@ -51,36 +51,29 @@ var username= "/HansUXdev";
 
 // 1. Clone repos
 // Create a task that loops through a list of users and clone each repo in a "build folder"
-// - - - - - - - - - - - - - - -
-	// function should loop through the studentList and return a list(array) strings 
-	// which are then passing into the exec command
-
+// - - - - - - - - - - - - - - 
 	var urlList = [];
 	for (var i = 0; i < studentList.length; i++) {	
-		urlList[i] = 'git clone '+site+studentList[i]+reponame
+		urlList[i] = 'mkdir '+studentList[i]+' && cd '+studentList[i]+ ' && git clone '+site+studentList[i]+reponame
+		// urlList[i] = 'mkdir ' 0+i++ +'cd ' i++ +'git clone '+site+studentList[i]+reponame
 		// console.log( 'git clone '+site+studentList[i]+reponame)
 	};
 
 	gulp.task('clone', function() {
 		return gulp.src('./**/**')
-	    .pipe(
-	    	// how it should look...
-		    	exec([urlList],options)
-	    	// Test example
-	    		// test example that should work...
-			    	// exec([
-			    	// 	'git clone https://github.com/peques/Basic-Portfolio',
-			    	// 	'git clone https://github.com/jeffhatch/Basic-Portfolio'
-			    	// 	],
-			    	// options)
-	    )
+		// Fuck it, hack it and repeat manually with the index number
+		.pipe(exec(urlList[0],options))
+		.pipe(exec(urlList[1],options))
+		// .pipe(gulp.dest('./test'));
+	    // .pipe(exec(urlList[1],options))
 	    // comment out the line below
 	    .pipe(exec.reporter(reportOptions));
 	});
 
 // 2. Lint the student files
-// Create a task that lints the students html, css and js
+// Create a task that loops through each student repo, lints the students html, css and js and exports a report
 // - - - - - - - - - - - - - - -
+
 
 
 
