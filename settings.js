@@ -1,7 +1,19 @@
 var settings = {
-	reponames: ['/week-4-game'],
+	reponames: [
+            // 'week-4-game',
+            // 'Crystals-Game',
+            // 'TriviaGame',
+            'GifTastic',
+            'GiphyAPI',
+            'GIPHY-API',
+            'RPS-Multiplayer',
+            'TrainTime',
+            'TrainSchedule',
+            'TrainScheduler',
+            'Train-Scheduler'
+      ],
 	studentList: [
-            "azcactus",             // Travis
+            // "azcactus",             // Travis
             'jalilakhtar',    // Jalil
             "nverges",              // Nick
             "afflatus480",          // Robert

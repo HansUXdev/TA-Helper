@@ -24,7 +24,7 @@ var urlList 	= [];
 
 
 
-
+// git clone https://github.com/azcactus/Trivia-Game.git azcactus/Trivia_Game
 
 // 1. Clone repos
 // Create a task that loops through a list of users and clone each repo in a "build folder"
@@ -33,7 +33,15 @@ var urlList 	= [];
     // urlList.concat(['', 'asdasdad'])
     reponames.forEach(function(reponame) {
       var list = studentList.map(function(student) {
-          return 'mkdir Students/' + student + reponame + ' || true && git clone ' + site + student + reponame + ' Students/' + student +  reponame + '|| true';  
+          // return 'cd students/' + student +'/'
+          //   + ' || true '
+          //   +'&& git clone ' 
+          //   + site + student +'/'+ reponame 
+          //   // + ' Students/' + student +'/'+  reponame 
+          //   + ' || true'; 
+          return ' git clone ' + site + student +'/'+ reponame 
+            + ' students/' + student +'/'+  reponame 
+            + ' || true'; 
       })
       urlList = urlList.concat(list);
     })
