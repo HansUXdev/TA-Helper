@@ -3,14 +3,17 @@ var settings = {
             // 'week-4-game',
             // 'Crystals-Game',
             // 'TriviaGame',
-            'GifTastic',
-            'GiphyAPI',
-            'GIPHY-API',
-            'RPS-Multiplayer',
-            'TrainTime',
-            'TrainSchedule',
-            'TrainScheduler',
-            'Train-Scheduler'
+            // 'GifTastic',
+            // 'GiphyAPI',
+            // 'GIPHY-API',
+            // 'RPS-Multiplayer',
+            // 'TrainTime',
+            // 'TrainSchedule',
+            // 'TrainScheduler',
+            // 'Train-Scheduler',
+            'liri-node-app',
+            'LIRI',
+            'LIRI-Bot'
       ],
 	studentList: [
             // "azcactus",             // Travis

@@ -58,9 +58,28 @@ gulp.task('default', function (cb) {
 
 
 
-// 2. Lint the student files
-// Create a task that loops through each student repo, lints the students html, css and js and exports a report
+// 2. Npm install all the student files
+// Create a task that loops through each student repo, runs npm install on for each project
 // - - - - - - - - - - - - - - -
+/*
+    reponames.forEach(function(reponame) {
+      var commandInstall = studentList.map(function(student) {
+          return ' cd ' + student +'/'+ reponame + ' npm i'
+            // + ' && ' + ' || true'; 
+      })
+      urlList = urlList.concat(commandInstall);
+    })
+    var install = urlList.join(' && ');
+    console.log(install);
+*/ 
+
+gulp.task('install', function (cb) {
+    exec(install, function (err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
+      cb(err);
+  });
+})
 
 
 
