@@ -28,5 +28,9 @@
     "run-sequence": "^1.1.1",
     "yargs": "^3.15.0"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "inquirer": "^3.2.0",
+    "terminal-kit": "^1.11.1"
+  }
 }

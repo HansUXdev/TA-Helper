@@ -49,7 +49,7 @@ var urlList 	= [];
     var command = urlList.join(' && ');
 
 gulp.task('default', function (cb) {
-    exec(command, function (err, stdout, stderr) {
+  exec(command, function (err, stdout, stderr) {
       console.log(stdout);
       console.log(stderr);
       cb(err);

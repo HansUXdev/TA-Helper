@@ -11,9 +11,11 @@ var settings = {
             // 'TrainSchedule',
             // 'TrainScheduler',
             // 'Train-Scheduler',
-            'liri-node-app',
-            'LIRI',
-            'LIRI-Bot'
+            // 'liri-node-app',
+            // 'LIRI',
+            // 'LIRI-Bot',
+            'FlashCards',
+            'Flashcard-Generator'
       ],
 	studentList: [
             // "azcactus",             // Travis
