@@ -25,17 +25,14 @@ inquirer.prompt([
       	"Install npm in repos",
       	"clone a specific repo from a student"
       ]
-    },
-	// {
-	// 	type: "input",
-	// 	message: "What is your name?",
-	// 	name: "name"
-	// },
+    }
 ])
 .then(function(user){
 	// console.log(JSON.stringify(user, null, 2));
 
-	if (user.choice==="Clone student repos") {cloneRepo()}
+	if (user.choice==="Clone student repos") {
+		cloneRepo()
+	}
 	if (user.choices==="Install npm in repos") {
 		console.log("npm is now installed all projects ! ");
 	}
@@ -47,6 +44,7 @@ inquirer.prompt([
 
 function cloneRepo(){
     // console.log("All student repos have been cloned ! ");
+    
     reponames.forEach(function(reponame) {
       var list = studentList.map(function(student) {
           return ' git clone ' + site + student +'/'+ reponame 
@@ -65,24 +63,3 @@ function cloneRepo(){
       // cb(err);
   });
 }
-cloneRepo();
-
-
-
-/*
-  inquirer.prompt([
-    {
-      type: "rawlist",
-      name: "choice",
-      message: "What would you like to do?",
-      choices: ["Add New Item", "Add Quantity to Existing Items"]
-    }
-  ]).then(function(val) {
-    if (val.choice === "Add New Item") {
-      addItem();
-    }
-    if (val.choice === "Add Quantity to Existing Items") {
-      addQuantity();
-    }
-  });
-*/ 
