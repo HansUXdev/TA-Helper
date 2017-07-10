@@ -1,5 +1,6 @@
 var settings = {
 	reponames: [
+            // "Basic-Portfolio",
             // 'week-4-game',
             // 'Crystals-Game',
             // 'TriviaGame',
@@ -11,25 +12,25 @@ var settings = {
             // 'TrainSchedule',
             // 'TrainScheduler',
             // 'Train-Scheduler',
-            // 'liri-node-app',
+            'liri-node-app',
             // 'LIRI',
             // 'LIRI-Bot',
-            'FlashCards',
-            'Flashcard-Generator'
+            // 'FlashCards',
+            // 'Flashcard-Generator'
       ],
 	studentList: [
-            // "azcactus",             // Travis
+            "azcactus",             // Travis
             'jalilakhtar',    // Jalil
-            "nverges",              // Nick
-            "afflatus480",          // Robert
-            "nathan25maloney",  // Nathan
-            "okaif90",              //
-            "ptk88",                // Phil
-            "peques",               // Saul
-            "tkappha",              // Tami
-            "heythisispaul",  // Paul Richards 
-            "kabrittan",            // kyle
-            "wesvanduine",          // Wes
+            // "nverges",              // Nick
+            // "afflatus480",          // Robert
+            // "nathan25maloney",  // Nathan
+            // "okaif90",              //
+            // "ptk88",                // Phil
+            // "peques",               // Saul
+            // "tkappha",              // Tami
+            // "heythisispaul",  // Paul Richards 
+            // "kabrittan",            // kyle
+            // "wesvanduine",          // Wes
     ]
 }
 
