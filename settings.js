@@ -1,7 +1,7 @@
 var settings = {
 	reponames: [
-            // "Basic-Portfolio",
-            // 'week-4-game',
+            "Basic-Portfolio",
+            'Responsive-Portfolio',
             // 'Crystals-Game',
             // 'TriviaGame',
             // 'GifTastic',
@@ -12,7 +12,7 @@ var settings = {
             // 'TrainSchedule',
             // 'TrainScheduler',
             // 'Train-Scheduler',
-            'liri-node-app',
+            // 'liri-node-app',
             // 'LIRI',
             // 'LIRI-Bot',
             // 'FlashCards',
@@ -20,7 +20,7 @@ var settings = {
       ],
 	studentList: [
             "azcactus",             // Travis
-            'jalilakhtar',    // Jalil
+            // 'jalilakhtar',    // Jalil
             // "nverges",              // Nick
             // "afflatus480",          // Robert
             // "nathan25maloney",  // Nathan

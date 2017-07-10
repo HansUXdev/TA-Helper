@@ -68,8 +68,8 @@ if (production) {
 // * @request - if !404 error, try and clone
 // * if the folder does not already exist, then clone it
 // * if the folder does exist and there is a repo 
-gitExists('kabrittan','Basic-Portfolio'); // should be 202 and should be cloned
-gitExists('azcactus','Basic-Portfolio');  // should be 404
+// gitExists('kabrittan','Basic-Portfolio'); // should be 202 and should be cloned
+// gitExists('azcactus','Basic-Portfolio');  // should be 404
 // gitExists(reponames, studentList);
 /////
 // console.log()
@@ -80,7 +80,7 @@ function gitExists(name,git){
 		request(`${site}${name}/${git}`,
 			// 'https://github.com/zurb/building-blocks/', 
 			function (error, response, body) {
-				if (!debug) {
+				if (debug) {
 				  // Print the response status code
 					  console.log(`${site}${name}/${git} statusCode: ${response} ${response.statusCode} `);
 				  // Print the error if one occurred 
@@ -102,7 +102,7 @@ function gitExists(name,git){
 // function should clone all student projects without an error
 // will iterate through 2 arrays (gitNames,students)
 // cloneRepo('kabrittan', 'Basic-Portfolio')
-// cloneAll(reponames, studentList);
+cloneAll(reponames, studentList);
 
 function cloneAll(gitNames,students){
 	console.log("======= CLONE ALL =======");
@@ -111,14 +111,14 @@ function cloneAll(gitNames,students){
 	      var list = studentList.map(function(student) {
 	      	// console.log(gitExists(student,repo))
 	      	// call the clone function
-	      	return `${cloneRepo(student,repo)}`
+	      	return ''+gitExists(student,repo);
 	      })
 	      urlList = urlList.concat(list);
 	    })
 			command = urlList.join(' && ');
 			
-	    // console.log('The array:\n',urlList);
-	    // console.log('The finished command:\n',command);
+	    console.log('The array:\n',urlList);
+	    console.log('The finished command:\n',command);
 		  // exec(command, function (err, stdout, stderr) {
 		  // 	  // 
 		  //     console.log(stdout);
