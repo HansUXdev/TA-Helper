@@ -1,84 +1,168 @@
 // var terminalkit = require("terminal-kit");
-var fs 						= require("fs");
+var fs 					= require("fs");
 var inquirer 			= require("inquirer");
 var gulp    			= require('gulp');
-var fs 						= require('fs');
-var exec 					= require('child_process').exec;
+var fs 					= require('fs');
+var exec 				= require('child_process').exec;
 var request 			= require("request"); //
 
 //
-var site 					= "https://github.com/";
+var site 				= "https://github.com/";
 var settings 			= require('./settings.js');
-var reponames 		= settings.reponames;
-var studentList 	= settings.studentList;
+var reponames 			= settings.reponames;
+var studentList 		= settings.studentList;
 var urlList 			= [];
 
 const debug = false;
-const production = false;
-
-if (production) {
+const production = true;
 
 	inquirer.prompt([
-		// Which part of the course is the TA in?
-	    {
-	      type: "rawlist",
-	      name: "choice",
-	      message: "What do you need to do?",
-	      choices: [
-	      	"Clone student repos", 
-	      	"Install npm in repos",
-	      	"clone a specific repo from a student"
-	      ]
-	    }
+		// 1. Actions
+		// TA's should be able to automatically:
+		// A). clone all student repos
+		// B). install npm in all repos (if package.json exist)
+		// - - - - - - - - - - - - - - -
+		    /*
+		    */
+		    {
+		      type: "rawlist",
+		      name: "choice",
+		      message: "What do you need to do?",
+		      choices: [
+		      	"Clone student repos", 
+		      	"Install npm in repos",
+		      	"clone a specific repo from a student"
+		      ]
+		    },
+
+		// VERSION 2 SPECS
+		// 1. Choose the week you are in
+		// 2. Clone the repos
+		// - - - - - - - - - - - - - - -
+	    /*
+		    {
+		      type: "rawlist",
+		      name: "week",
+		      message: "Which week are you in do you need to do?",
+		      choices: [
+				"Week 1",
+				"Week 2",
+				"Week 3",
+				"Week 4",
+				"Week 5",
+				"Week 6",
+				"Week 7",
+				"Week 8",
+				"Week 9",
+				"Week 10",
+				"Week 11",
+				"Week 12",
+				"Week 13",
+				"Week 14",
+				"Week 15",
+				"Week 16",
+				"Week 17",
+				"Week 18",
+				"Week 19",
+				"Week 20",
+				"Week 21",
+				"Week 22",
+				"Week 23"
+		      ]
+		    },
+		*/
 	])
 	.then(function(user){
 		// console.log(JSON.stringify(user, null, 2));
 
 		if (user.choice==="Clone student repos") {
-			cloneRepo()
+			// cloneRepo()
+			if (production) {
+				testClone()
+			}
 		}
-		if (user.choices==="Install npm in repos") {
+		if (user.choice==="Install npm in repos") {
 			console.log("npm is now installed all projects ! ");
+			installNPM()
 		}
-		if (user.choices==="clone a specific repo from a student") {
+		if (user.choice==="clone a specific repo from a student") {
 			// need to store to arguements
 			// cloneRepo()
 			console.log("cloned ! ");
 		}
 	});
 
-};
+// MAIN FUNCTIONS
+// - - - - - - - - - - - - - - -
+	// 1. Clone all student repos
+	// creates a list of all instances, include repos that do not exist...
+	// - - - - - - - - - - - - - - -
+		function testClone(){
+			    reponames.forEach(function(repo) {
+			      var list = studentList.map(function(student) {
+			      	return `git clone ${site}${student}/${repo} students/${student}/${repo}` 
+			      })
+			      urlList = urlList.concat(list);
+				  command = urlList.join(' && ');
+			    })
 
+				exec(command, function (err, stdout, stderr) {
+				  // 
+					console.log(stdout);
+					console.log(stderr);
+					// cb(err);
+				});
+		}
 
-// function should clone all student projects without an error
-// will iterate through 2 arrays (gitNames,students)
-// cloneRepo('kabrittan', 'Basic-Portfolio')
-	function cloneRepo(name,git){
-		command= `git clone ${site}${name}/${git} students/${name}/${git}`;
-	  exec(command, function (err, stdout, stderr) {
-	      console.log(stdout);
-	      console.log(stderr);
-	  });
+		// VERSION 2
+		// function should clone all student projects without an error
+		// will iterate through 2 arrays (gitNames,students)
+		// cloneRepo('kabrittan', 'Basic-Portfolio')
+		// - - - - - - - - - - - - - - -
+			function cloneRepo(name,git){
+				command= `git clone ${site}${name}/${git} students/${name}/${git}`;
+			  exec(command, function (err, stdout, stderr) {
+			      console.log(stdout);
+			      console.log(stderr);
+			  });
+			}	
+	// 2. Npm install all the student files
+	// Create a task that loops through each student repo, runs npm install on for each project
+	// - - - - - - - - - - - - - - -
+	function installNPM(){
+		console.log("RUNNING ...")
+	    reponames.forEach(function(reponame) {
+	      var list = studentList.map(function(student) {
+	      	return `cd students/${student}/${reponame} && npm i || true` 
+	      })
+	      urlList = urlList.concat(list);
+			  command = urlList.join(' && ');
+	    })
+	    console.log(command)
+		exec(command, function (err, stdout, stderr) {
+		  console.log(stdout);
+		  console.log(stderr);
+		});
 	}
 
-
-/////
-// function checks if the git repo already exists
-// * @fs.existsSync - Returns true if the file exists, 
-// * @request - if !404 error, try and clone
-// * if the folder does not already exist, then clone it
-// * if the folder does exist and there is a repo 
-// gitExists('kabrittan','Basic-Portfolio'); // should be 202 and should be cloned
-// gitExists('azcactus','Basic-Portfolio');  // should be 404
-// gitExists(reponames, studentList);
-/////
-// console.log()
-
-function gitExists(name,git){
-	// console.log("======= git exist =======");
-
+// HELPER FUNCTIONS
+// - - - - - - - - - - - - - - -
+	// 1. gitExists
+	// Function checks if the git repo already exists
+	// * @fs.existsSync - Returns true if the file exists, 
+	// * @request - if !404 error, try and clone
+	// - - - - - - - - - - - - - - -
+	// * TEST * if the folder does not already exist, then clone it
+	// gitExists('HansUxDev','TA-Helper'); // should be 202 and should be cloned
+	// - - - - - - - - - - - - - - -
+	// * TEST * if the folder does exist and there is a repo 
+	// gitExists('HansUxDev','taHelper');  // should be 404
+	// - - - - - - - - - - - - - - -
+	// * TEST * if it works with reponames & studentList = arrays
+	// gitExists(reponames, studentList);
+	// - - - - - - - - - - - - - - -
+	function gitExists(name,git){
 		request(`${site}${name}/${git}`,
-			// 'https://github.com/zurb/building-blocks/', 
 			function (error, response, body) {
 				if (debug) {
 				  // Print the response status code
@@ -87,90 +171,36 @@ function gitExists(name,git){
 					  // console.log(`${site}${name}/${git} error: ${error}`); 
 				};
 				// console.log(`========`)
-
 				// create a list of the repos that don't return a 404
 			  if (response && response.statusCode !== 404) {
 			  	console.log(`This is a VALID git repo: ${site}${name}/${git} `)
-			  	return `${site}${name}/${git}`;
+			  	// return `${site}${name}/${git}`;
 			  };
 		});
-}
+	}
+	// 2. fileExist
+	// Check if there is a package.json file.
+	// - - - - - - - - - - - - - - 
+	function fileExist(name,git){
+	  var folderString    = "students/"+
+	    name+'/'+   //  "heythisispaul/"+
+	    git+ '/'+   //  "bamazon/"+
+	    "package.json";
+
+	  if(fs.existsSync(folderString)) {
+	    // if(callback) {callback();}
+	    // return;
+	    // npmInstall();
+	    console.log('File Exists')
+	  }
+	  else if (!fs.existsSync(folderString)){
+	    console.log("file does not exist")
+	  }
+	}
 
 
 
-/////
-// function should clone all student projects without an error
-// will iterate through 2 arrays (gitNames,students)
-// cloneRepo('kabrittan', 'Basic-Portfolio')
-cloneAll(reponames, studentList);
-
-function cloneAll(gitNames,students){
-	console.log("======= CLONE ALL =======");
-	// creates a list of all instances, include repos that do not exist...
-	    gitNames.forEach(function(repo) {
-	      var list = studentList.map(function(student) {
-	      	// console.log(gitExists(student,repo))
-	      	// call the clone function
-	      	return ''+gitExists(student,repo);
-	      })
-	      urlList = urlList.concat(list);
-	    })
-			command = urlList.join(' && ');
-			
-	    console.log('The array:\n',urlList);
-	    console.log('The finished command:\n',command);
-		  // exec(command, function (err, stdout, stderr) {
-		  // 	  // 
-		  //     console.log(stdout);
-		  //     console.log(stderr);
-		  //     // cb(err);
-		  // });
-	console.log("=========================");
-}
-
-function installNPM(){
-    reponames.forEach(function(reponame) {
-      var list = studentList.map(function(student) {
-      	// git clone https://github.com/kabrittan/Basic-Portfolio students/kabrittan/Basic-Portfolio || true
-      	return `cd ${student}/${reponame} npm i || true` 
-      })
-      // console.log(`LIST:
-      // 	${list}
-      // `);
-      urlList = urlList.concat(list);
-		  command = urlList.join(' && ');
-    })
-
-    console.log('\n',command);
-}
-// installNPM();
 
 
-
-/////
-// Foundation CLI example
-// function changes the Scss file
-// * fs.existsSync - Returns true if the file exists, 
-// * 
-/////
-/*
-
-function updateAppSCSS(name, callback) {
-  var scssString    = "src/assets/scss/components/building-blocks/_" + name + ".scss";
-
-  if(!fs.existsSync(scssString)) {
-    if(callback) {callback();}
-    return;
-  }
-  fs.readFile('src/assets/scss/app.scss', {}, function(err, content) {
-    line = "@import 'components/building-blocks/" + name + "';"
-    if(content.indexOf(line) === -1) {
-      content = content + "\n" + line;
-    }
-    fs.writeFile('src/assets/scss/app.scss', content, callback);
-  });
-};
-
-*/ 
 
 

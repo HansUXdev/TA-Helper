@@ -22,6 +22,26 @@ var studentList = settings.studentList;
 var urlList 	= [];
 
 
+// Check if there is a package.json file.
+// - - - - - - - - - - - - - - 
+function fileExist(name,git){
+  var folderString    = "students/"+
+    name+'/'+   //  "heythisispaul/"+
+    git+ '/'+   //  "bamazon/"+
+    "package.json";
+
+  if(fs.existsSync(folderString)) {
+    // if(callback) {callback();}
+    // return;
+    // npmInstall();
+    console.log('File Exists')
+  }
+  else if (!fs.existsSync(folderString)){
+    console.log("file does not exist")
+  }
+}
+// fileExist('heythisispaul','bamazon');
+// fileExist('azcactus','bamazon');
 
 
 // git clone https://github.com/azcactus/Trivia-Game.git azcactus/Trivia_Game
@@ -29,32 +49,25 @@ var urlList 	= [];
 // 1. Clone repos
 // Create a task that loops through a list of users and clone each repo in a "build folder"
 // - - - - - - - - - - - - - - 
-    
-    // urlList.concat(['', 'asdasdad'])
+function cloneRepo(cb){
     reponames.forEach(function(reponame) {
       var list = studentList.map(function(student) {
-          // return 'cd students/' + student +'/'
-          //   + ' || true '
-          //   +'&& git clone ' 
-          //   + site + student +'/'+ reponame 
-          //   // + ' Students/' + student +'/'+  reponame 
-          //   + ' || true'; 
           return ' git clone ' + site + student +'/'+ reponame 
             + ' students/' + student +'/'+  reponame 
             + ' || true'; 
       })
       urlList = urlList.concat(list);
     })
+    var command = urlList.join(' && '); 
+    // Run the command
+    exec(command, function (err, stdout, stderr) {
+        // console.log(stdout);
+        // console.log(stderr);
+        cb(err);
+    }); 
+}
 
-    var command = urlList.join(' && ');
-
-gulp.task('default', function (cb) {
-  exec(command, function (err, stdout, stderr) {
-      console.log(stdout);
-      console.log(stderr);
-      cb(err);
-  });
-})
+gulp.task('default', cloneRepo)
 
 
 
@@ -73,16 +86,37 @@ gulp.task('default', function (cb) {
     console.log(install);
 */ 
 
-gulp.task('install', function (cb) {
+
+function npmInstall(cb){
+    var install;
+    reponames.forEach(function(reponame) {
+      var installList = studentList.map(function(student) {
+        return ' cd students/' + student +'/'+ reponame + ' && '+' npm i' + ' || true'; 
+        //`cd students/${student}/${reponame} && npm i ` 
+      })
+      urlList = urlList.concat(installList);
+      install = urlList.join(' && ');
+    })
+    console.log('install \n',install)
     exec(install, function (err, stdout, stderr) {
       console.log(stdout);
       console.log(stderr);
       cb(err);
-  });
-})
+    });
+}
 
 
+gulp.task('install', npmInstall)
 
+
+// function (cb) {
+//     // console.log(install)
+//     exec(install, function (err, stdout, stderr) {
+//       console.log(stdout);
+//       console.log(stderr);
+//       cb(err);
+//     });
+// }
 
 // 3. Server
 // Create a task to open up each students project in a new tab

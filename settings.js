@@ -1,7 +1,7 @@
 var settings = {
 	reponames: [
-            "Basic-Portfolio",
-            'Responsive-Portfolio',
+            // "Basic-Portfolio",
+            // 'Responsive-Portfolio',
             // 'Crystals-Game',
             // 'TriviaGame',
             // 'GifTastic',
@@ -17,19 +17,21 @@ var settings = {
             // 'LIRI-Bot',
             // 'FlashCards',
             // 'Flashcard-Generator'
+            // Week 12 PT
+            'bamazon',
+            // 'Bamazon'
       ],
 	studentList: [
-            "azcactus",             // Travis
-            // 'jalilakhtar',    // Jalil
+            // "azcactus",             // Travis
+            // 'jalilakhtar',          // Jalil
             // "nverges",              // Nick
             // "afflatus480",          // Robert
-            // "nathan25maloney",  // Nathan
-            // "okaif90",              //
+            // "nathan25maloney",      // Nathan
+            // "okaif90",              // Omar
             // "ptk88",                // Phil
             // "peques",               // Saul
             // "tkappha",              // Tami
-            // "heythisispaul",  // Paul Richards 
-            // "kabrittan",            // kyle
+            "heythisispaul",        // Paul Richards 
             // "wesvanduine",          // Wes
     ]
 }
