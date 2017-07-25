@@ -18,21 +18,24 @@ var settings = {
             // 'FlashCards',
             // 'Flashcard-Generator'
             // Week 12 PT
-            'bamazon',
-            // 'Bamazon'
+            // 'bamazon',
+            // 'Bamazon',
+            'FriendFinder',
+            'Friend-Finder',
+            'Friend-Finder'
       ],
 	studentList: [
-            // "azcactus",             // Travis
-            // 'jalilakhtar',          // Jalil
-            // "nverges",              // Nick
-            // "afflatus480",          // Robert
-            // "nathan25maloney",      // Nathan
-            // "okaif90",              // Omar
-            // "ptk88",                // Phil
-            // "peques",               // Saul
-            // "tkappha",              // Tami
+            "azcactus",             // Travis
+            'jalilakhtar',          // Jalil
+            "nverges",              // Nick
+            "afflatus480",          // Robert
+            "nathan25maloney",      // Nathan
+            "okaif90",              // Omar
+            "ptk88",                // Phil
+            "peques",               // Saul
+            "tkappha",              // Tami
             "heythisispaul",        // Paul Richards 
-            // "wesvanduine",          // Wes
+            "wesvanduine",          // Wes
     ]
 }
 
